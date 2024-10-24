@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const todosRouter = require("../router/todos");
+const todosRouter = require("./router/todos");
 
-// Allow JSON body in requests
+// Middleware
+
 app.use(express.json());
 
-// Use todos router
+// Todos router middleware
 app.use("/todos", todosRouter);
 
 app.get("*", (req, res) => {

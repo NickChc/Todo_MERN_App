@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "src/assets/variables.scss";
 
 * {
   margin: 0;
@@ -7,8 +7,9 @@
 }
 
 body {
-  background-color: $clr-primary;
-  color: $clr-secondary;
+  background-color: variables.$clr-primary;
+  color: variables.$clr-secondary;
 
-  font-size: $font-base;
+  font-size: variables.$font-base;
+  font-family: sans-serif;
 }

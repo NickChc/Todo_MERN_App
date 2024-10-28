@@ -1,10 +1,18 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("dotenv").config();
 const todosRouter = require("./router/todos");
 const connectDB = require("./db/connect");
 
 // Middleware
+
+// Allow requests from front end
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGIN,
+  })
+);
 
 app.use(express.json());
 

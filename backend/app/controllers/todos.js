@@ -4,7 +4,7 @@ async function getAllTodos(req, res) {
   try {
     const todos = await Todo.find({});
 
-    res.status(200).json({ success: true, data: { todos } });
+    res.status(200).json({ success: true, todos });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -23,7 +23,7 @@ async function getSingleTodo(req, res) {
       });
     }
 
-    res.status(200).json({ success: true, data: { todo } });
+    res.status(200).json({ success: true, data: todo });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -52,7 +52,7 @@ async function deleteTodo(req, res) {
       });
     }
 
-    res.status(200).json({ success: true, data: { todo } });
+    res.status(200).json({ success: true, data: todo });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -74,7 +74,7 @@ async function updateTodo(req, res) {
       });
     }
 
-    res.status(200).json({ success: true, data: { todo } });
+    res.status(200).json({ success: true, data: todo });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

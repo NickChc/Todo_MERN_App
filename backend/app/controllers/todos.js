@@ -4,35 +4,80 @@ async function getAllTodos(req, res) {
   try {
     const todos = await Todo.find({});
 
-    console.log(todos);
-
     res.status(200).json({ success: true, data: { todos } });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ success: false, data: "Couldn't send todos" });
+    res.status(500).json({ success: false, message: err.message });
   }
 }
 
-function getSingleTodo(req, res) {
-  const { id: todoId } = req.params;
+async function getSingleTodo(req, res) {
+  try {
+    const { id: todoId } = req.params;
 
-  res.status(200).json({ success: true, data: `Got Single Todo ${todoId}` });
+    const todo = await Todo.findOne({ _id: todoId });
+
+    if (todo == null) {
+      return res.status(404).json({
+        success: false,
+        message: `Todo with an ID - ${todoId} not found`,
+      });
+    }
+
+    res.status(200).json({ success: true, data: { todo } });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 }
 
-function createTodo(req, res) {
-  res.status(201).json({ success: true, data: req.body });
+async function createTodo(req, res) {
+  try {
+    const todo = await Todo.create(req.body);
+
+    res.status(201).json({ success: true, data: todo });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 }
 
-function deleteTodo(req, res) {
-  const { id: todoId } = req.params;
+async function deleteTodo(req, res) {
+  try {
+    const { id: todoId } = req.params;
 
-  res
-    .status(200)
-    .json({ success: true, data: `Deleted Single Todo ${todoId}` });
+    const todo = await Todo.findOneAndDelete({ _id: todoId });
+
+    if (todo == null) {
+      return res.status(404).json({
+        success: false,
+        message: `Todo with an ID - ${todoId} doesn't exist`,
+      });
+    }
+
+    res.status(200).json({ success: true, data: { todo } });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 }
 
-function updateTodo(req, res) {
-  res.status(200).json({ success: true, data: req.body });
+async function updateTodo(req, res) {
+  try {
+    const { id: todoId } = req.params;
+
+    const todo = await Todo.findOneAndUpdate({ _id: todoId }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (todo == null) {
+      return res.status(404).json({
+        success: false,
+        message: `Todo with an ID - ${todoId} doesn't exist`,
+      });
+    }
+
+    res.status(200).json({ success: true, data: { todo } });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 }
 
 module.exports = {

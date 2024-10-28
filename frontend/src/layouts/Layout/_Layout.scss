@@ -1,0 +1,25 @@
+@use "src/assets/variables.scss";
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+
+  width: 500px;
+  max-width: 90vw;
+  margin: 42px auto;
+  padding: 12px;
+  border: solid 2px variables.$clr-secondary;
+  border-radius: 16px;
+  box-shadow: 4px 6px 4px 2px rgba($color: #000000, $alpha: 1);
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+  }
+
+  hr {
+    border-color: variables.$clr-primary;
+  }
+}

@@ -2,7 +2,18 @@ const Todo = require("../models/todo");
 
 async function getAllTodos(req, res) {
   try {
-    const todos = await Todo.find({});
+    const { active } = req.query;
+
+    let todos = [];
+
+    if (active === "true") {
+      todos = await Todo.find({ is_done: true });
+    } else if (active === "false") {
+      todos = await Todo.find({ is_done: false });
+      console.log(todos);
+    } else {
+      todos = await Todo.find({});
+    }
 
     res.status(200).json({ success: true, todos });
   } catch (err) {

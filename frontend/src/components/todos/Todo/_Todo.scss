@@ -1,0 +1,58 @@
+@use "src/assets/variables.scss";
+
+.todo {
+  border: solid 1px variables.$clr-secondary;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > h3 {
+    font-size: 1.6rem;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+
+    & > button {
+      font-size: 1.2rem;
+      padding: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: variables.$clr-secondary;
+      background-color: variables.$clr-add;
+      border: solid 1px variables.$clr-add;
+      transition: 300ms background, 300ms color, 300ms border-color,
+        300ms opacity;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &[name="toggle"] {
+        font-size: 1rem;
+
+        &.active {
+          border-color: variables.$clr-success;
+          background-color: variables.$clr-success;
+        }
+
+        &.loading {
+          opacity: 60%;
+          pointer-events: none;
+        }
+      }
+
+      &:hover[name="toggle"] {
+        opacity: 75%;
+      }
+
+      &:hover[name="delete"] {
+        background-color: variables.$clr-danger;
+        border-color: variables.$clr-danger;
+      }
+    }
+  }
+}

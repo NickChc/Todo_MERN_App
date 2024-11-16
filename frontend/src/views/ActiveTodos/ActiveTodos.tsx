@@ -1,3 +1,4 @@
+import { TodoList } from "@src/components/todos/TodoList";
 import { getTodos } from "@src/data/getTodos";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,17 +12,16 @@ export function ActiveTodos() {
     queryFn: () => getTodos("active"),
   });
 
-  if (error) return <div>{error.message}</div>;
-
   if (isLoading) return <h1>LOADING ...</h1>;
+
+  if (error || activeTodos == null) {
+    return <div>{error?.message || "Failed to fetch todos"}</div>;
+  }
 
   return (
     <>
-      <div>
-        {activeTodos?.map((todo) => {
-          return <div key={todo.id}>{todo.title}</div>;
-        })}
-      </div>
+      <h1>Active Todo</h1>
+      <TodoList todos={activeTodos} />
     </>
   );
 }

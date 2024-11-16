@@ -13,3 +13,12 @@ body {
   font-size: variables.$font-base;
   font-family: sans-serif;
 }
+
+.error-box {
+  background-color: red;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 12px;
+}

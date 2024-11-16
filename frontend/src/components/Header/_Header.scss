@@ -1,0 +1,14 @@
+.main-header {
+  & > nav {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    margin-inline: auto;
+    column-gap: 24px;
+  }
+
+  & > hr {
+    margin: 12px 0 12px 0;
+    border: solid 1px black;
+  }
+}
